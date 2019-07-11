@@ -1,20 +1,26 @@
 package labEleven;
 
-import java.util.ArrayList;
-import java.util.InputMismatchException;
-import java.util.Scanner;
 import java.util.Set;
 import java.util.TreeSet;
+import java.util.ArrayList;
+import java.util.InputMismatchException;
+
+import java.util.Scanner;
+
 
 public class MovieApp {
 
 	public static void main(String[] args) {
+		
 		Scanner scnr = new Scanner(System.in);
+		
 		int categoryChoice = 0;
 		String userInput = "y";
 	
 		ArrayList<Movie> movieObjects = new ArrayList<>(); 
+		
 		for (int i = 1; i <= 100; ++i) {
+			
 			movieObjects.add(MovieIO.getMovie(i));
 		}
 		
@@ -26,33 +32,43 @@ public class MovieApp {
 		do { 
 			
 			System.out.println("What category are you interested in?\n");
+			
 			Movie.displayCategories();
+			
 			do {
 				try {
 					System.out.println("\nUpon reading the list, enter a number from 1 through 6: ");
+					
 					categoryChoice = scnr.nextInt();
 					scnr.nextLine();
+					
 					if (categoryChoice >= 1 && categoryChoice <= 6) {
+						
 						System.out.println("\nYou've entered " + categoryChoice + ", '" + Movie.categoryList(categoryChoice - 1) + "'. Here are some selections from that genre.\n");
+					
 					} else {
+						
 						System.out.println("That is not a valid category.");
 					}
+					
 				} catch (Exception ex) {
+					
 					System.out.println("That is not a valid category.");
 					scnr.nextLine();
 				}
+				
 			} while ((categoryChoice < 1) || (categoryChoice > 6)); 
 			
 				
 			switch (categoryChoice) {
 					case 1:
-						Set<String> animateds = new TreeSet<>();
+						Set<String> animatedMovies = new TreeSet<>();
 						for (int i = 0; i <movieObjects.size(); ++i) {
 							if (movieObjects.get(i).getCategory().equals("animated")) {
-								animateds.add(movieObjects.get(i).getTitle());
+								animatedMovies.add(movieObjects.get(i).getTitle());
 							}
 						}
-						for (String animated: animateds) {
+						for (String animated: animatedMovies) {
 							System.out.println(animated);
 						}
 						break;
